@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Task Management System</title>
+    <title>Task Manager</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -13,11 +13,22 @@
     <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-6xl mx-auto">
             <!-- Header -->
-            <div class="mb-8">
-                <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-2">Task Manager</h1>
-                <p class="text-slate-600 dark:text-slate-400">Keep track of your tasks and stay organized</p>
+            <div class="mb-8 flex items-center justify-between">
+                <div>
+                    <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-2">Task Manager</h1>
+                    <p class="text-slate-600 dark:text-slate-400">Keep track of your tasks and stay organized</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="{{ route('welcome') }}" class="inline-flex items-center justify-center rounded-full bg-slate-900 px-8 py-3 text-base font-semibold text-white shadow-lg shadow-slate-900/10 transition hover:bg-slate-800">Back to Home</a>
+                    <a href="{{ route('profile.edit') }}" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100 dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">Profile</a>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="inline-flex items-center justify-center rounded-full border border-red-300 bg-red-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-red-600/10 transition hover:bg-red-700">Log Out</button>
+                    </form>
+                </div>
             </div>
 
+        
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Main Tasks Section -->
                 <div class="lg:col-span-2">

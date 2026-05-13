@@ -24,10 +24,9 @@
             <header class="container mx-auto px-6 py-6 flex items-center justify-between">
                 <div class="text-lg font-semibold">Task Management</div>
                 <nav class="flex items-center gap-4 text-sm">
-                    <a href="{{ route('dashboard') }}" class="rounded-full border border-slate-300 bg-white/80 px-4 py-2 text-slate-900 shadow-sm transition hover:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100">Dashboard</a>
                     @if (Route::has('login'))
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="rounded-full border border-slate-300 bg-white/80 px-4 py-2 text-slate-900 shadow-sm transition hover:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100">My Tasks</a>
+                            <a href="{{ route('dashboard') }}" class="rounded-full border border-slate-300 bg-white/80 px-4 py-2 text-slate-900 shadow-sm transition hover:bg-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100">Dashboard</a>
                         @else
                             <a href="{{ route('login') }}" class="rounded-full border border-transparent bg-sky-600 px-4 py-2 text-white shadow-sm transition hover:bg-sky-700">Log in</a>
                             @if (Route::has('register'))
