@@ -11,7 +11,13 @@ class Task extends Model
         'title',
         'description',
         'status',
+        'due_date',
+        'priority',
         'user_id',
+    ];
+
+    protected $casts = [
+        'due_date' => 'date',
     ];
 
     public function user(): BelongsTo

@@ -58,6 +58,29 @@
                                     class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400"
                                 ></textarea>
                             </div>
+                            <div class="grid gap-4 sm:grid-cols-2">
+                                <div>
+                                    <label for="due_date" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Due Date</label>
+                                    <input
+                                        type="date"
+                                        id="due_date"
+                                        name="due_date"
+                                        class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                                    >
+                                </div>
+                                <div>
+                                    <label for="priority" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Priority</label>
+                                    <select
+                                        id="priority"
+                                        name="priority"
+                                        class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                                    >
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+                                        <option value="low">Low</option>
+                                    </select>
+                                </div>
+                            </div>
                             <button 
                                 type="submit"
                                 class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
@@ -87,10 +110,22 @@
                                                 @if ($task->description)
                                                     <p class="text-slate-600 dark:text-slate-400 text-sm mb-3">{{ $task->description }}</p>
                                                 @endif
-                                                <div class="flex items-center gap-2">
+                                                <div class="flex flex-wrap items-center gap-2 mb-3">
                                                     <span class="inline-block px-3 py-1 rounded text-xs font-medium {{ $task->status === 'completed' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300' }}">
                                                         {{ $task->status === 'completed' ? '✓ Completed' : '⏱ Pending' }}
                                                     </span>
+
+                                                    @if ($task->priority)
+                                                        <span class="inline-block px-3 py-1 rounded text-xs font-medium {{ $task->priority === 'high' ? 'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300' : ($task->priority === 'medium' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300' : 'bg-slate-100 text-slate-700 dark:bg-slate-900 dark:text-slate-300') }}">
+                                                            {{ ucfirst($task->priority) }} Priority
+                                                        </span>
+                                                    @endif
+
+                                                    @if ($task->due_date)
+                                                        <span class="inline-block px-3 py-1 rounded text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-900 dark:text-slate-300">
+                                                            Due {{ $task->due_date->format('M j, Y') }}
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="flex items-center gap-2">

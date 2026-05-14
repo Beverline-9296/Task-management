@@ -19,8 +19,11 @@ class TaskController extends Controller
         Task::create($request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'due_date' => 'nullable|date',
+            'priority' => 'nullable|in:low,medium,high',
         ]) + [
             'status' => 'pending',
+            'priority' => $request->input('priority', 'medium'),
             'user_id' => auth()->id(),
         ]);
 
@@ -48,6 +51,8 @@ class TaskController extends Controller
             'title' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|nullable|string',
             'status' => 'sometimes|required|in:pending,completed',
+            'due_date' => 'sometimes|nullable|date',
+            'priority' => 'sometimes|required|in:low,medium,high',
         ]));
 
         return redirect()->route('dashboard');
