@@ -27,7 +27,7 @@ class TaskController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success', 'Task created successfully!');
     }
 
     public function edit(Task $task)
@@ -47,15 +47,23 @@ class TaskController extends Controller
             abort(403, 'Unauthorized');
         }
 
-        $task->update($request->validate([
+        $validated = $request->validate([
             'title' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|nullable|string',
             'status' => 'sometimes|required|in:pending,completed',
             'due_date' => 'sometimes|nullable|date',
             'priority' => 'sometimes|required|in:low,medium,high',
-        ]));
+        ]);
 
-        return redirect()->route('dashboard');
+        $task->update($validated);
+
+        // Determine the appropriate success message
+        $message = 'Task updated successfully!';
+        if (isset($validated['status']) && $validated['status'] === 'completed') {
+            $message = 'Task marked as completed!';
+        }
+
+        return redirect()->route('dashboard')->with('success', $message);
     }
 
     public function destroy(Task $task)
@@ -67,6 +75,6 @@ class TaskController extends Controller
 
         $task->delete();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success', 'Task deleted successfully!');
     }
 }

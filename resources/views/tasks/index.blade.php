@@ -28,7 +28,31 @@
                 </div>
             </div>
 
-        
+            @if(session('success'))
+                @php
+                    $successMessage = session('success');
+                    $isDelete = str_contains($successMessage, 'deleted');
+                @endphp
+                <div id="flash-message" class="mb-6 rounded-lg border p-4 shadow-sm {{ $isDelete ? 'bg-red-600/15 border-red-500 dark:bg-red-500/20 dark:border-red-400' : 'bg-emerald-600/15 border-emerald-500 dark:bg-emerald-500/20 dark:border-emerald-400' }}">
+                    <div class="flex items-center gap-3">
+                        <div class="flex-shrink-0">
+                            @if($isDelete)
+                                <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-2.707-9.293a1 1 0 011.414-1.414L10 8.586l1.293-1.293a1 1 0 011.414 1.414L11.414 10l1.293 1.293a1 1 0 01-1.414 1.414L10 11.414l-1.293 1.293a1 1 0 01-1.414-1.414L8.586 10 7.293 8.707z" clip-rule="evenodd" />
+                                </svg>
+                            @else
+                                <svg class="h-5 w-5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            @endif
+                        </div>
+                        <div>
+                            <p class="text-sm font-semibold {{ $isDelete ? 'text-red-700 dark:text-red-100' : 'text-emerald-700 dark:text-emerald-100' }}">{{ $successMessage }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Main Tasks Section -->
                 <div class="lg:col-span-2">
@@ -202,5 +226,23 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var flash = document.getElementById('flash-message');
+
+            if (! flash) {
+                return;
+            }
+
+            setTimeout(function () {
+                flash.style.transition = 'opacity 0.5s ease';
+                flash.style.opacity = '0';
+
+                setTimeout(function () {
+                    flash.remove();
+                }, 500);
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
