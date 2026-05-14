@@ -16,11 +16,20 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/" class="text-2xl font-semibold text-gray-900 dark:text-white">
-                    <h1>welcome to Task Manager system </h1><br>
-                    <p>log in to manage your tasks</p>
+            <div class="text-center mb-6">
+
+                <a href="/" class="inline-block">
+
+                    <h1 class="text-4xl font-bold text-blue-500 mb-3 tracking-wide">
+                        Welcome to Task Manager System
+                    </h1>
+                    oklch(68.5% 0.169 237.323)
+                    <p class="text-lg text-gray-300 font-medium">
+                        Log in to manage your tasks efficiently
+                    </p>
+
                 </a>
+
             </div>
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
