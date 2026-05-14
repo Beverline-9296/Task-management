@@ -13,17 +13,17 @@
     <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-6xl mx-auto">
             <!-- Header -->
-            <div class="mb-8 flex items-center justify-between">
+            <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>
                     <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-2">Task Manager</h1>
                     <p class="text-slate-600 dark:text-slate-400">Keep track of your tasks and stay organized</p>
                 </div>
-                <div class="flex items-center gap-4">
-                    <a href="{{ route('welcome') }}" class="inline-flex items-center justify-center rounded-full bg-slate-900 px-8 py-3 text-base font-semibold text-white shadow-lg shadow-slate-900/10 transition hover:bg-slate-800">Back to Home</a>
-                    <a href="{{ route('profile.edit') }}" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100 dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">Profile</a>
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="{{ route('welcome') }}" class="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/10 transition hover:bg-slate-800">Back to Home</a>
+                    <a href="{{ route('profile.edit') }}" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100 dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700">Profile</a>
                     <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
-                        <button type="submit" class="inline-flex items-center justify-center rounded-full border border-red-300 bg-red-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-red-600/10 transition hover:bg-red-700">Log Out</button>
+                        <button type="submit" class="inline-flex items-center justify-center rounded-full border border-red-300 bg-red-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-600/10 transition hover:bg-red-700">Log Out</button>
                     </form>
                 </div>
             </div>
@@ -104,11 +104,11 @@
                             <div class="divide-y divide-slate-200 dark:divide-slate-700">
                                 @foreach ($tasks as $task)
                                     <div class="px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-700 transition duration-150">
-                                        <div class="flex items-start justify-between gap-4">
-                                            <div class="flex-1">
-                                                <h3 class="font-semibold text-slate-900 dark:text-white mb-1">{{ $task->title }}</h3>
+                                        <div class="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                                            <div class="flex-1 min-w-0">
+                                                <h3 class="font-semibold text-slate-900 dark:text-white mb-1 break-words">{{ $task->title }}</h3>
                                                 @if ($task->description)
-                                                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-3">{{ $task->description }}</p>
+                                                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-3 break-words">{{ $task->description }}</p>
                                                 @endif
                                                 <div class="flex flex-wrap items-center gap-2 mb-3">
                                                     <span class="inline-block px-3 py-1 rounded text-xs font-medium {{ $task->status === 'completed' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300' }}">
@@ -128,7 +128,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="flex items-center gap-2">
+                                            <div class="flex flex-wrap items-center gap-2">
                                                 @if($task->status !== 'completed')
                                                     <form action="/tasks/{{ $task->id }}" method="POST" class="inline">
                                                         @csrf
